@@ -1,6 +1,5 @@
 <?php
 
-
 class SlackSyntax
 {
     const AS = '|';

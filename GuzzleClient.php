@@ -14,6 +14,8 @@ class GuzzleClient extends \GuzzleHttp\Client
     {
         $config = [
             'base_uri' => 'https://slack.com/api/',
+            'proxy' => 'localhost:8888',
+            'verify' => false,
         ];
         parent::__construct($config);
         $this->checkConnection();

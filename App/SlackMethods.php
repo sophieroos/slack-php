@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Class SlackMethods
- */
 class SlackMethods
 {
     const USERS_CONVERSATIONS = 'users.conversations';
