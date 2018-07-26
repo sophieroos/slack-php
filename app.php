@@ -10,6 +10,7 @@ define('DIR_MODEL', DIR_BASE . 'Model/');
 include DIR_BASE . 'GuzzleClient.php';
 include DIR_BASE . '.env.php';
 include DIR_BASE . 'Emojis.php';
+include DIR_BASE . 'setup.php';
 
 include DIR_TASK . 'Task.php';
 include DIR_TASK . 'SendMessage.php';
@@ -29,7 +30,3 @@ include DIR_MODEL . 'User.php';
 include DIR_MODEL . 'Channel.php';
 
 include DIR_BASE . 'command_line.php';
-
-$_ENV['users'] = [];
-
-$_ENV['channels'] = [];

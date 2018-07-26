@@ -2,13 +2,8 @@
 
 include 'app.php';
 
-//echo SlackSyntax::getLink('http://nu.nl/');
-
 $client = new GuzzleClient();
-$getConverstations = new GetConversations();
-$getConverstations->execute($client);
-
-echo 'Done', PHP_EOL;
+setup($client);
 
 while (true) {
     $line = trim(readline());
