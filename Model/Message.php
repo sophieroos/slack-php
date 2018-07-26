@@ -16,7 +16,6 @@ class Message
     private $text;
 
     /**
-     * Message constructor.
      * @param string $message
      * @param User $user
      */
@@ -39,23 +38,18 @@ class Message
      */
     public function __toString()
     {
-        $space = str_repeat(' ', 29 - strlen($this->user));
-
-        $user_colored = $this->user;
-        if ($this->user === $_ENV['current_user']) {
-            $user_colored = Colors::LIGHT_BLUE . $this->user . Colors::RESET;
-        }
-
-        return sprintf('%s:%s%s', $user_colored, $space, $this->createSpacedText($this->text));
+        return sprintf('%s%s', $this->user->createStyledString(), $this->createStyledString($this->text));
     }
 
     /**
      * @param string $text
      * @return string
      */
-    private function createSpacedText(string $text): string
+    private function createStyledString(string $text): string
     {
-        $new_line_30_spaces = PHP_EOL . str_repeat(' ', 30);
+        $message_spaced_length = $_ENV['width_of_screen'] - User::USERNAME_SPACED_LENGTH;
+        $new_line_30_spaces = PHP_EOL . str_repeat(' ', User::USERNAME_SPACED_LENGTH);
+
         $lines = explode("\n", $text);
         $lines = array_filter($lines, function ($line) {
             return $line !== '' && $line !== "\r";
@@ -63,8 +57,8 @@ class Message
 
         $text = '';
         foreach ($lines as $line) {
-            while (strlen($line) > 180) {
-                $try = substr($line, 0, 180);
+            while (strlen($line) > $message_spaced_length) {
+                $try = substr($line, 0, $message_spaced_length);
                 $space_pos = strrpos($try, ' ') + 1;
                 if ($text !== '') {
                     $text .= $new_line_30_spaces;

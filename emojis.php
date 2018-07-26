@@ -21,12 +21,12 @@ if (!file_exists(__DIR__ . '\Cache\emojis.php')) {
     foreach ($file as $line) {
         $emoji = [];
 
-        $puntkomma_pos = strpos($line, ';');
-        $unicodes = trim(substr($line, 0, $puntkomma_pos));
+        $semicolon_pos = strpos($line, ';');
+        $unicodes = trim(substr($line, 0, $semicolon_pos));
         $emoji['code points'] = explode(' ', $unicodes);
 
-        $hekje_pos = strpos($line, '#');
-        $emoji_and_name = trim(substr($line, $hekje_pos + 1));
+        $hash_pos = strpos($line, '#');
+        $emoji_and_name = trim(substr($line, $hash_pos + 1));
 
         $white_space_pos = strpos($emoji_and_name, ' ');
         $emoji['emoji'] = substr($emoji_and_name, 0, $white_space_pos);

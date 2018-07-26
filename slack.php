@@ -39,6 +39,7 @@ function enter_channel($line, $client)
     foreach ($last_messages as $message) {
         echo $message, PHP_EOL;
     }
+    echo $_ENV['current_user']->createStyledString();
 }
 
 /**

@@ -5,6 +5,8 @@
  */
 class User
 {
+    const USERNAME_SPACED_LENGTH = 30;
+
     /**
      * @var string
      */
@@ -74,5 +76,19 @@ class User
             return 'Me';
         }
         return $this->realName;
+    }
+
+    /**
+     * @return string
+     */
+    public function createStyledString(): string
+    {
+        $space = str_repeat(' ', self::USERNAME_SPACED_LENGTH - strlen($this) - 1);
+
+        $user_colored = $this;
+        if ($this === $_ENV['current_user']) {
+            $user_colored = Colors::LIGHT_BLUE . $this . Colors::RESET;
+        }
+        return sprintf('%s:%s', $user_colored, $space);
     }
 }
