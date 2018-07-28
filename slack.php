@@ -28,24 +28,6 @@ while (true) {
  * @param $line
  * @param $client
  */
-function enter_channel($line, $client)
-{
-    $channelId = array_search($line, $_ENV['channels-lower-case'], false);
-    $parameters = [$channelId];
-    $last_messages = new GetLastMessages($parameters);
-
-    $last_messages = $last_messages->execute($client);
-
-    foreach ($last_messages as $message) {
-        echo $message, PHP_EOL;
-    }
-    echo $_ENV['current_user']->createStyledString();
-}
-
-/**
- * @param $line
- * @param $client
- */
 function run_task($line, $client)
 {
     $line = str_replace(':', ' ', $line);
