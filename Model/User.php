@@ -79,6 +79,21 @@ class User
     }
 
     /**
+     * @param $array
+     * @return User
+     */
+    public static function __set_state($array)
+    {
+        $id = $array['id'];
+        $self = new self($id);
+
+        $self->name = $array['realName'];
+        $self->realName = $array['realName'];
+        $self->bot = $array['realName'];
+        return $self;
+    }
+
+    /**
      * @return string
      */
     public function createStyledString(): string

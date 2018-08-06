@@ -14,8 +14,7 @@ function setup(GuzzleClient $client)
     $currrent_user = $getUserInfo->execute($client);
     $_ENV['current_user'] = $currrent_user;
 
-    $getConverstations = new GetConversations();
-    $getConverstations->execute($client);
+    cache($client);
 
     echo 'Done', PHP_EOL;
 }

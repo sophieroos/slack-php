@@ -38,7 +38,8 @@ class GetUserInfo
                 $user = $client->sendPostRequest(SlackMethods::BOTS_INFO, $params)[$type];
                 $real_name = $user['name'];
             } else {
-                $user = $client->sendPostRequest(SlackMethods::USERS_INFO, $params)[$type];
+                $user = $client->sendPostRequest(SlackMethods::USERS_INFO, $params);
+                $user = $user[$type];
                 $real_name = $user['profile']['real_name'];
             }
 

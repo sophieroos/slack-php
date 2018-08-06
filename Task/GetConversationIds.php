@@ -17,12 +17,13 @@ class GetConversationIds implements Task
      * @param GuzzleClient $client
      * @return array
      */
-    public function execute(GuzzleClient $client): array
+    public function execute(GuzzleClient $client): Channels
     {
         $params = [
             'types' => 'public_channel,private_channel,mpim,im'
         ];
         $response = $client->sendPostRequest(SlackMethods::USERS_CONVERSATIONS, $params);
+        return Channels::createFromApi($response['channels']);
         $channels = [];
         foreach ($response['channels'] as $channel) {
             $channels[] = new Channel(

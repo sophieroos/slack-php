@@ -35,6 +35,14 @@ class Channel
      */
     private $members = [];
 
+    public static function createFromApi(
+        $id,
+        $name,
+        $type
+    ) {
+        return new self($id, $name, $type);
+    }
+
     /**
      * Channel constructor.
      * @param $id
@@ -99,9 +107,27 @@ class Channel
     /**
      * @return string
      */
+    public function getShortChannelName()
+    {
+        return str_replace(' ', '', $this->name);
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return sprintf('%s: %s', $this->id, $this->name());
+    }
+
+    public static function __set_state($array)
+    {
+        $id = $array['id'];
+        $name = $array['name'];
+        $type = $array['type'];
+        $self = new self($id, $name, $type);
+        $self->members = $array['members'];
+        return $self;
     }
 
     /**
@@ -117,7 +143,7 @@ class Channel
         if ($this->type === self::TYPE_PRIVATE_CHANNEL) {
             return implode('-', $this->members);
         }
-        
+
         return str_replace(['--', 'mpdm-', '-1'], [' ', '', ''], $name);
     }
 }

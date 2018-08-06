@@ -14,9 +14,9 @@ class GetConversations implements Task
 
     /**
      * @param GuzzleClient $client
-     * @return array
+     * @return Channels
      */
-    public function execute(GuzzleClient $client): array
+    public function execute(GuzzleClient $client): Channels
     {
         $getConversations = new GetConversationIds();
         $channels = $getConversations->execute($client);
@@ -79,8 +79,6 @@ class GetConversations implements Task
         $_ENV['channels-lower-case'][$channel->id()] = strtolower($channelName);
 
         if ($channel->type() !== Channel::TYPE_DIRECT_MESSAGE_YOU) {
-            $_ENV['autocomplete_options'][] = 'sendmessage:' . $channelName;
-            $_ENV['autocomplete_options'][] = $channelName;
             return;
         }
 

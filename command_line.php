@@ -1,10 +1,4 @@
 <?php
-$_ENV['autocomplete_options'] = [
-//    SendMessage::class,
-    'SendChatCommand:me:dnd',
-    GetConversations::class,
-];
-
 /**
  * @param $string
  * @param $function
@@ -24,7 +18,7 @@ function get_match($string, $function)
 function get_autocomplete_matches($string)
 {
     $matches = [];
-    foreach ($_ENV['autocomplete_options'] as $function) {
+    foreach (get_auto_complete_options() as $function) {
         $matches[] = get_match($string, strtolower($function)) . ' ';
     }
     return array_filter($matches);

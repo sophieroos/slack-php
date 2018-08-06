@@ -13,10 +13,18 @@ while (true) {
             run_task($line, $client);
             continue;
         }
-        if (in_array(strtolower($line), $_ENV['channels-lower-case'], false)) {
+        /** @var Channels $channels */
+        $channels = require CACHE_CHANNELS;
+
+        if ($channels->containsChannelWithName($line)) {
             enter_channel($line, $client);
             continue;
         }
+
+        /*if (in_array(strtolower($line), $array, false)) {
+            enter_channel($line, $client);
+            continue;
+        }*/
         echo "Function doesn't exist";
     } else {
         echo 'Mention a function';

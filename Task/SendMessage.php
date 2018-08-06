@@ -37,7 +37,7 @@ class SendMessage implements Task
             'text' => $this->message->text(),
         ];
 
-        $client->sendPostRequest(SlackMethods::CHAT_POST_MESSAGE, $params);
+//        $client->sendPostRequest(SlackMethods::CHAT_POST_MESSAGE, $params);
 
         return $this->message;
     }
