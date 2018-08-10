@@ -6,11 +6,13 @@ define('DIR_BASE', __DIR__ . '/');
 define('DIR_APP', DIR_BASE . 'App/');
 define('DIR_TASK', DIR_BASE . 'Task/');
 define('DIR_MODEL', DIR_BASE . 'Model/');
+define('DIR_CACHE', DIR_BASE . 'Cache/');
 
 include DIR_BASE . 'GuzzleClient.php';
 include DIR_BASE . '.env.php';
 include DIR_BASE . 'emojis.php';
 include DIR_BASE . 'setup.php';
+include DIR_BASE . 'cache.php';
 
 include DIR_TASK . 'Task.php';
 include DIR_TASK . 'SendMessage.php';
@@ -28,5 +30,7 @@ include DIR_APP . 'SlackSyntax.php';
 include DIR_MODEL . 'Message.php';
 include DIR_MODEL . 'User.php';
 include DIR_MODEL . 'Channel.php';
+
+define('CACHE_EMOJIS', DIR_CACHE . 'emojis.php');
 
 include DIR_BASE . 'command_line.php';
