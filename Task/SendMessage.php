@@ -33,7 +33,8 @@ class SendMessage implements Task
     public function execute(GuzzleClient $client): \Message
     {
         $params = [
-            'channel' => $this->channel,
+//            'channel' => $this->channel,
+            'channel' => 'DA3TFDKLK',
             'text' => $this->message->text(),
         ];
 

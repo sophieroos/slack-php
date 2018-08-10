@@ -40,6 +40,8 @@ function enter_channel($line, $client)
         echo $message, PHP_EOL;
     }
     echo $_ENV['current_user']->createStyledString();
+
+    $_SESSION['entered_channel'] = $channelId;
 }
 
 /**
