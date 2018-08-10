@@ -1,10 +1,42 @@
 <?php
 
-if (!file_exists(__DIR__ . '\Cache')) {
-    mkdir(__DIR__ . '\Cache');
+/**
+ * @param GuzzleClient $client
+ */
+function cache_emojis(GuzzleClient $client)
+{
+    if (!file_exists(CACHE_EMOJIS)) {
+        $emojis = array_merge(get_emojis_from_unicode(), get_emojis_from_slack($client));
+        file_put_contents(CACHE_EMOJIS, '<?php return ' . var_export($emojis, true) . ';');
+    }
 }
 
-if (!file_exists(__DIR__ . '\Cache\emojis.php')) {
+/**
+ * @param GuzzleClient $client
+ * @return array
+ */
+function get_emojis_from_slack($client): array
+{
+    $results = $client->sendPostRequest(SlackMethods::EMOJI_LIST)['emoji'];
+
+    $emojis = [];
+    foreach ($results as $name => $picture) {
+        $emoji = [];
+        $emoji['code points'] = [];
+        $emoji['emoji'] = $picture;
+        $emoji['name'] = $name;
+
+        $emojis[] = $emoji;
+    }
+
+    return $emojis;
+}
+
+/**
+ * @return array
+ */
+function get_emojis_from_unicode(): array
+{
     $file = file('https://unicode.org/Public/emoji/11.0/emoji-test.txt');
 
     $file = array_filter($file, function ($value) {
@@ -34,6 +66,5 @@ if (!file_exists(__DIR__ . '\Cache\emojis.php')) {
 
         $emojis[] = $emoji;
     }
-
-    file_put_contents(__DIR__ . '\Cache\emojis.php', '<?php return ' . var_export($emojis, true) . ';');
+    return $emojis;
 }
