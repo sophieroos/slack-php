@@ -5,10 +5,9 @@
  */
 function cache_emojis(GuzzleClient $client)
 {
-    if (!file_exists(__DIR__ . '\Cache\emojis.php')) {
-        $emojis[] = get_emojis_from_slack($client);
-        $emojis[] = get_emojis_from_unicode();
-        file_put_contents(__DIR__ . '\Cache\emojis.php', '<?php return ' . var_export($emojis, true) . ';');
+    if (!file_exists(CACHE_EMOJIS)) {
+        $emojis = array_merge(get_emojis_from_unicode(), get_emojis_from_slack($client));
+        file_put_contents(CACHE_EMOJIS, '<?php return ' . var_export($emojis, true) . ';');
     }
 }
 

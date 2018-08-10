@@ -31,4 +31,6 @@ include DIR_MODEL . 'Message.php';
 include DIR_MODEL . 'User.php';
 include DIR_MODEL . 'Channel.php';
 
+define('CACHE_EMOJIS', DIR_CACHE . 'emojis.php');
+
 include DIR_BASE . 'command_line.php';
