@@ -13,7 +13,7 @@ class SendMessage implements Task
     /**
      * @var string
      */
-    private $channel;
+    private $channelId;
 
     /**
      * SendMessage constructor.
@@ -21,9 +21,11 @@ class SendMessage implements Task
      */
     public function __construct(array $parameters = [])
     {
-        $this->channel = array_search(strtolower($parameters[0]), $_ENV['channels-lower-case'], false);
+        if (count($parameters) >= 2) {
+            $this->channelId = array_search(strtolower($parameters[0]), $_ENV['channels-lower-case'], false);
 
-        $this->message = new Message(implode(' ', array_slice($parameters, 1)), $_ENV['current_user']);
+            $this->message = new Message(implode(' ', array_slice($parameters, 1)), $_ENV['current_user']);
+        }
     }
 
     /**
@@ -33,13 +35,35 @@ class SendMessage implements Task
     public function execute(GuzzleClient $client): \Message
     {
         $params = [
-//            'channel' => $this->channel,
-            'channel' => 'DA3TFDKLK',
+            'channel' => $this->channelId,
+//            'channel' => 'DA3TFDKLK',
             'text' => $this->message->text(),
         ];
 
         $client->sendPostRequest(SlackMethods::CHAT_POST_MESSAGE, $params);
 
         return $this->message;
+    }
+
+    /**
+     * @param string $channelId
+     * @return $this
+     */
+    public function withChannel(string $channelId)
+    {
+        $this->channelId = $channelId;
+
+        return $this;
+    }
+
+    /**
+     * @param Message $message
+     * @return $this
+     */
+    public function withMessage(Message $message)
+    {
+        $this->message = $message;
+
+        return $this;
     }
 }

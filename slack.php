@@ -17,6 +17,14 @@ while (true) {
             enter_channel($line, $client);
             continue;
         }
+        if ($_SESSION['entered_channel'] !== false) {
+            if (stripos($line, 'exit') !== false) {
+                exit_channel();
+                continue;
+            }
+            send_message($line, $_SESSION['entered_channel'], $client);
+            continue;
+        }
         echo "Function doesn't exist";
     } else {
         echo 'Mention a function';
@@ -42,6 +50,12 @@ function enter_channel($line, $client)
     echo $_ENV['current_user']->createStyledString();
 
     $_SESSION['entered_channel'] = $channelId;
+}
+
+function exit_channel()
+{
+    $_SESSION['entered_channel'] = false;
+    echo 'Exited' . PHP_EOL;
 }
 
 /**
@@ -70,4 +84,19 @@ function run_task($line, $client)
         }
         echo $results;
     }
+}
+
+/**
+ * @param $message
+ * @param $channelId
+ * @param $client
+ */
+function send_message($message, $channelId, $client)
+{
+    $sendMessage = new SendMessage();
+    $sendMessage->withChannel($channelId)->withMessage(new Message($message));
+
+    $sendMessage->execute($client);
+
+    echo $_ENV['current_user']->createStyledString();
 }
