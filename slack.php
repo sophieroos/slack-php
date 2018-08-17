@@ -17,29 +17,19 @@ while (true) {
             enter_channel($line, $client);
             continue;
         }
+        if ($_SESSION['entered_channel'] !== false) {
+            if (stripos($line, 'exit') !== false) {
+                exit_channel();
+                continue;
+            }
+            send_message($line, $_SESSION['entered_channel'], $client);
+            continue;
+        }
         echo "Function doesn't exist";
     } else {
         echo 'Mention a function';
     }
     echo PHP_EOL;
-}
-
-/**
- * @param $line
- * @param $client
- */
-function enter_channel($line, $client)
-{
-    $channelId = array_search($line, $_ENV['channels-lower-case'], false);
-    $parameters = [$channelId];
-    $last_messages = new GetLastMessages($parameters);
-
-    $last_messages = $last_messages->execute($client);
-
-    foreach ($last_messages as $message) {
-        echo $message, PHP_EOL;
-    }
-    echo $_ENV['current_user']->createStyledString();
 }
 
 /**

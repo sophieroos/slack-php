@@ -35,7 +35,6 @@ class GetLastMessages implements Task
         return array_map(function ($message) use ($client) {
             $user = $this->getUserFromMessage($message);
 
-
             return new Message($this->getTextFromMessage($message), $this->getUserWithInfo($user, $client));
         }, array_reverse($messages));
     }

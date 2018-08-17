@@ -14,6 +14,7 @@ include DIR_BASE . 'GuzzleClient.php';
 include DIR_BASE . '.env.php';
 include DIR_BASE . 'emojis.php';
 include DIR_BASE . 'setup.php';
+include DIR_BASE . 'enter_channel.php';
 include DIR_BASE . 'cache.php';
 
 include DIR_TASK . 'Task.php';

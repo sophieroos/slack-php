@@ -19,9 +19,14 @@ class Message
      * @param string $message
      * @param User $user
      */
-    public function __construct(string $message, User $user)
+    public function __construct(string $message, User $user = null)
     {
         $this->text = $message;
+        if ($user === null) {
+            //@TODO retrieve current user from cache
+            $this->user = $_ENV['current_user'];
+            return;
+        }
         $this->user = $user;
     }
 

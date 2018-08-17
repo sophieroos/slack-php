@@ -19,5 +19,7 @@ function setup(GuzzleClient $client)
     $getConverstations = new GetConversations();
     $getConverstations->execute($client);
 
+    $_SESSION['entered_channel'] = false;
+
     echo 'Done', PHP_EOL;
 }
