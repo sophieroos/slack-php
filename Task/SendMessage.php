@@ -36,7 +36,6 @@ class SendMessage implements Task
     {
         $params = [
             'channel' => $this->channelId,
-//            'channel' => 'DA3TFDKLK',
             'text' => $this->message->text(),
         ];
 
