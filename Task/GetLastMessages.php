@@ -45,8 +45,16 @@ class GetLastMessages implements Task
      */
     private function getTextFromMessage($message): string
     {
-        if (array_key_exists('subtype', $message) && $message['subtype'] === 'file_comment') {
-            return $message['comment']['comment'];
+        if (array_key_exists('subtype', $message)) {
+            $subtype = $message['subtype'];
+
+            if ($subtype === 'file_comment') {
+                return $message['comment']['comment'];
+            }
+
+            if ($subtype === 'bot_message') {
+                return $message['attachments'][0]['pretext'];
+            }
         }
 
         return $message['text'];
