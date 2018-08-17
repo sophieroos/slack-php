@@ -12,4 +12,5 @@ class SlackMethods
     const USERS_PROFILE_GET = 'users.profile.get';
     const CONVERSATIONS_HISTORY = 'conversations.history';
     const CHAT_COMMAND = 'chat.command';
+    const EMOJI_LIST = 'emoji.list';
 }

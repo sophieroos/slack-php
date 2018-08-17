@@ -8,6 +8,8 @@ function setup(GuzzleClient $client)
     $_ENV['users'] = [];
     $_ENV['channels'] = [];
 
+    cache($client);
+
     $currrent_user = new User($_ENV['current_user_id']);
 
     $getUserInfo = new GetUserInfo($currrent_user);
@@ -16,6 +18,8 @@ function setup(GuzzleClient $client)
 
     $getConverstations = new GetConversations();
     $getConverstations->execute($client);
+
+    $_SESSION['entered_channel'] = false;
 
     echo 'Done', PHP_EOL;
 }
