@@ -22,11 +22,11 @@ class GuzzleClient extends \GuzzleHttp\Client
     }
 
     /**
-     * @param $method
+     * @param string $method
      * @param array $params
      * @return array
      */
-    public function sendPostRequest($method, array $params = []): array
+    public function sendPostRequest(string $method, array $params = []): array
     {
         $params['token'] = $_ENV['api_token'];
         $params['as_user'] = true;
@@ -38,7 +38,7 @@ class GuzzleClient extends \GuzzleHttp\Client
         return json_decode($this->get($method, $params)->getBody(), true);
     }
 
-    private function checkConnection()
+    private function checkConnection(): void
     {
         try {
             $this->sendPostRequest(SlackMethods::API_TEST);

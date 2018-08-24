@@ -6,11 +6,11 @@ $_ENV['autocomplete_options'] = [
 ];
 
 /**
- * @param $string
- * @param $function
- * @return mixed
+ * @param string $string
+ * @param string $function
+ * @return string
  */
-function get_match($string, $function)
+function get_match(string $string, string $function)
 {
     if (stripos($function, $string) === 0) {
         return $function;
@@ -18,10 +18,10 @@ function get_match($string, $function)
 }
 
 /**
- * @param $string
+ * @param string $string
  * @return array
  */
-function get_autocomplete_matches($string)
+function get_autocomplete_matches(string $string)
 {
     $matches = [];
     foreach ($_ENV['autocomplete_options'] as $function) {
@@ -39,6 +39,8 @@ function get_command()
     return substr($rl_info['line_buffer'], 0, $rl_info['point']);
 }
 
-readline_completion_function(function () {
-    return get_autocomplete_matches(get_command());
-});
+readline_completion_function(
+    function () {
+        return get_autocomplete_matches(get_command());
+    }
+);

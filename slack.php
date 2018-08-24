@@ -1,6 +1,6 @@
 <?php
 
-include 'app.php';
+require 'app.php';
 
 $client = new GuzzleClient();
 setup($client);
@@ -33,10 +33,10 @@ while (true) {
 }
 
 /**
- * @param $line
- * @param $client
+ * @param string $line
+ * @param GuzzleClient $client
  */
-function run_task($line, $client)
+function run_task(string $line, GuzzleClient $client): void
 {
     $line = str_replace(':', ' ', $line);
     $array = explode(' ', $line);

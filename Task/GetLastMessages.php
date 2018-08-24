@@ -40,10 +40,10 @@ class GetLastMessages implements Task
     }
 
     /**
-     * @param $message
+     * @param array $message
      * @return string
      */
-    private function getTextFromMessage($message): string
+    private function getTextFromMessage(array $message): string
     {
         if (array_key_exists('subtype', $message)) {
             $subtype = $message['subtype'];
@@ -61,7 +61,7 @@ class GetLastMessages implements Task
     }
 
     /**
-     * @param $message
+     * @param array $message
      * @return User
      */
     private function getUserFromMessage($message): User
@@ -83,14 +83,13 @@ class GetLastMessages implements Task
     }
 
     /**
-     * @param $userId
-     * @param $client
+     * @param User $userId
+     * @param GuzzleClient $client
      * @return mixed
      */
-    private function getUserWithInfo($userId, $client)
+    private function getUserWithInfo(User $userId, GuzzleClient $client)
     {
         $getUserInfo = new GetUserInfo($userId);
         return $getUserInfo->execute($client);
     }
-
 }

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @param $line
- * @param $client
+ * @param string $line
+ * @param GuzzleClient $client
  */
-function enter_channel($line, $client)
+function enter_channel(string $line, GuzzleClient $client)
 {
     $channelId = array_search($line, $_ENV['channels-lower-case'], false);
     $parameters = [$channelId];
@@ -27,11 +27,11 @@ function exit_channel()
 }
 
 /**
- * @param $message
- * @param $channelId
- * @param $client
+ * @param string $message
+ * @param string $channelId
+ * @param GuzzleClient $client
  */
-function send_message($message, $channelId, $client)
+function send_message(string $message, string $channelId, GuzzleClient $client)
 {
     $sendMessage = new SendMessage();
     $sendMessage->withChannel($channelId)->withMessage(new Message($message));

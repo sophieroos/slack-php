@@ -7,7 +7,7 @@ class Channel
 {
     const TYPE_PUBLIC_CHANNEL = 'public_channel';
 
-    CONST TYPE_PRIVATE_CHANNEL = 'private_channel';
+    const TYPE_PRIVATE_CHANNEL = 'private_channel';
 
     const TYPE_PRIVATE_DIRECT = 'im';
 
@@ -37,11 +37,11 @@ class Channel
 
     /**
      * Channel constructor.
-     * @param $id
-     * @param $name
-     * @param $type
+     * @param string $id
+     * @param string $name
+     * @param string $type
      */
-    public function __construct($id, $name, $type)
+    public function __construct(string $id, string $name, string $type)
     {
         $this->id = $id;
         $this->name = $name;
@@ -105,10 +105,10 @@ class Channel
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return mixed
      */
-    private function cleanUpName($name)
+    private function cleanUpName(string $name)
     {
         if ($this->type === self::TYPE_PRIVATE_DIRECT || $this->type === self::TYPE_DIRECT_MESSAGE_YOU) {
             return $this->members[0];
@@ -117,7 +117,7 @@ class Channel
         if ($this->type === self::TYPE_PRIVATE_CHANNEL) {
             return implode('-', $this->members);
         }
-        
+
         return str_replace(['--', 'mpdm-', '-1'], [' ', '', ''], $name);
     }
 }
