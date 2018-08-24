@@ -22,7 +22,9 @@ class GetConversations implements Task
         $channels = $getConversations->execute($client);
 
         foreach ($channels as $channel) {
-            /** @var $channel Channel */
+            /**
+             * @var $channel Channel
+             */
 
             $channelType = $channel->type();
 
@@ -53,12 +55,12 @@ class GetConversations implements Task
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @param Channel $channel
-     * @param $client
+     * @param GuzzleClient $client
      * @return User
      */
-    private function addMemberToChannel($id, Channel $channel, $client): \User
+    private function addMemberToChannel(string $id, Channel $channel, GuzzleClient $client): \User
     {
         $user = new User($id);
         $getUserInfo = new GetUserInfo($user);
@@ -72,7 +74,7 @@ class GetConversations implements Task
     /**
      * @param Channel $channel
      */
-    private function addChannelToAutocompleteOptions(Channel $channel)
+    private function addChannelToAutocompleteOptions(Channel $channel): void
     {
         $channelName = str_replace(' ', '', $channel->name());
         $_ENV['channels'][$channel->id()] = $channelName;

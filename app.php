@@ -10,30 +10,30 @@ define('DIR_TASK', sprintf($format_base, 'Task'));
 define('DIR_MODEL', sprintf($format_base, 'Model'));
 define('DIR_CACHE', sprintf($format_base, 'Cache'));
 
-include DIR_BASE . 'GuzzleClient.php';
-include DIR_BASE . '.env.php';
-include DIR_BASE . 'emojis.php';
-include DIR_BASE . 'setup.php';
-include DIR_BASE . 'enter_channel.php';
-include DIR_BASE . 'cache.php';
+require DIR_BASE . 'GuzzleClient.php';
+require DIR_BASE . '.env.php';
+require DIR_BASE . 'emojis.php';
+require DIR_BASE . 'setup.php';
+require DIR_BASE . 'enter_channel.php';
+require DIR_BASE . 'cache.php';
 
-include DIR_TASK . 'Task.php';
-include DIR_TASK . 'SendMessage.php';
-include DIR_TASK . 'GetConversationIds.php';
-include DIR_TASK . 'GetConversations.php';
-include DIR_TASK . 'GetUsersInConversation.php';
-include DIR_TASK . 'GetUserInfo.php';
-include DIR_TASK . 'GetLastMessages.php';
-include DIR_TASK . 'SendChatCommand.php';
+require DIR_TASK . 'Task.php';
+require DIR_TASK . 'SendMessage.php';
+require DIR_TASK . 'GetConversationIds.php';
+require DIR_TASK . 'GetConversations.php';
+require DIR_TASK . 'GetUsersInConversation.php';
+require DIR_TASK . 'GetUserInfo.php';
+require DIR_TASK . 'GetLastMessages.php';
+require DIR_TASK . 'SendChatCommand.php';
 
-include DIR_APP . 'SlackMethods.php';
-include DIR_APP . 'Colors.php';
-include DIR_APP . 'SlackSyntax.php';
+require DIR_APP . 'SlackMethods.php';
+require DIR_APP . 'Colors.php';
+require DIR_APP . 'SlackSyntax.php';
 
-include DIR_MODEL . 'Message.php';
-include DIR_MODEL . 'User.php';
-include DIR_MODEL . 'Channel.php';
+require DIR_MODEL . 'Message.php';
+require DIR_MODEL . 'User.php';
+require DIR_MODEL . 'Channel.php';
 
 define('CACHE_EMOJIS', DIR_CACHE . 'emojis.php');
 
-include DIR_BASE . 'command_line.php';
+require DIR_BASE . 'command_line.php';

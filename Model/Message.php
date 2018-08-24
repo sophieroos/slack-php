@@ -23,7 +23,7 @@ class Message
     {
         $this->text = $message;
         if ($user === null) {
-            //@TODO retrieve current user from cache
+            //Chaching will be fixed in issue 7
             $this->user = $_ENV['current_user'];
             return;
         }

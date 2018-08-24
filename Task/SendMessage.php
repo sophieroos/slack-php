@@ -17,7 +17,7 @@ class SendMessage implements Task
 
     /**
      * SendMessage constructor.
-     * @param $parameters
+     * @param array $parameters
      */
     public function __construct(array $parameters = [])
     {

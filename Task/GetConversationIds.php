@@ -7,7 +7,7 @@ class GetConversationIds implements Task
 {
     /**
      * GetConversationIds constructor.
-     * @param $parameters
+     * @param array $parameters
      */
     public function __construct(array $parameters = [])
     {
@@ -53,10 +53,10 @@ class GetConversationIds implements Task
     }
 
     /**
-     * @param $channel
+     * @param array $channel
      * @return string
      */
-    private function getName($channel): string
+    private function getName(array $channel): string
     {
         if (array_key_exists('name', $channel)) {
             return $channel['name'];
